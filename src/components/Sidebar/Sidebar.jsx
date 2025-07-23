@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/logo.png";
 import PropTypes from "prop-types";
 import styled, { ThemeProvider } from "styled-components";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const routes = [
   { title: "Home", icon: "fas-solid fa-house", path: "/" },
@@ -203,15 +203,18 @@ const Sidebar = (props) => {
       <Bar className={containerClassnames}>
         <Header>
           <img src={logo} alt="TensorFlow logo" width={40} height={40} />
-          {isOpened && (
-            <LogoLabel
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-            >
-              TensorFlow
-            </LogoLabel>
-          )}
+          <AnimatePresence>
+            {isOpened && (
+              <LogoLabel
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                TensorFlow
+              </LogoLabel>
+            )}
+          </AnimatePresence>
 
           <SidebarToggler
             onClick={toggleSidebar}
@@ -237,15 +240,18 @@ const Sidebar = (props) => {
               }}
             >
               <FontAwesomeIcon icon={route.icon} />
-              {isOpened && (
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                >
-                  {route.title}
-                </motion.span>
-              )}
+              <AnimatePresence>
+                {isOpened && (
+                  <motion.span
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    {route.title}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </MenuItem>
           ))}
         </MenuList>
@@ -260,15 +266,18 @@ const Sidebar = (props) => {
               }}
             >
               <FontAwesomeIcon icon={route.icon} />
-              {isOpened && (
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                >
-                  {route.title}
-                </motion.span>
-              )}
+              <AnimatePresence>
+                {isOpened && (
+                  <motion.span
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    {route.title}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </MenuItem>
           ))}
         </MenuList>
